@@ -1,4 +1,4 @@
-const {QueryProtocol, TeamSpeak, TextMessageTargetMode} = require("ts3-nodejs-library")
+const { QueryProtocol, TeamSpeak, TextMessageTargetMode } = require("ts3-nodejs-library")
 const config = require("./config.json")
 
 TeamSpeak.connect({
@@ -14,7 +14,8 @@ TeamSpeak.connect({
         TeamSpeak.registerEvent("channel", 0)
     ])
 
-    const publicChannels = (await TeamSpeak.channelList())
+    TeamSpeak.on("clientmoved", async ev => {
+        const publicChannels = (await TeamSpeak.channelList())
         .filter((isPublicChannel) => {
             return config.settings.parentPublicChannels.includes(isPublicChannel.pid)
         })
@@ -22,7 +23,6 @@ TeamSpeak.connect({
             return x.cid
         })
 
-    TeamSpeak.on("clientmoved", async ev => {
         try {
             const permitGroupClientList = await TeamSpeak.channelGroupClientList(config.settings.permitChannelGroup, null, ev.client.databaseId)
 
