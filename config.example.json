@@ -1,0 +1,16 @@
+{
+  "interface": {
+    "password": "",
+    "queryport": 10022,
+    "serverport": null,
+    "host": "127.0.0.1",
+    "nickname": "",
+    "username": ""
+  },
+  "settings": {
+    "parentPublicChannels": [],
+    "guestChannelGroup": null,
+    "permitChannelGroup": null,
+    "notificationContent": ""
+  }
+}
